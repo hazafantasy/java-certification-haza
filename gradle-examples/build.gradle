@@ -1,0 +1,49 @@
+/* This is the build.gradle file
+*  for inject dependencies, compile
+*  and pack .jar our little HelloWorld example.
+*/
+
+//This plugin makes gradle build Java
+apply plugin: 'java'
+
+//This plugin makes gradle to build a executable jar
+apply plugin: 'application'
+mainClassName = 'hello.HelloWorld'
+
+
+/*This tells gradle to look for dependencies
+* on Maven Central http://search.maven.org
+*/
+repositories {
+	mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+/*The dependencies blog is used to download
+* and install dependencies (other libraries)
+* to your project.
+*/
+dependencies {
+	// This means that at compile we need
+	// the version 2.2 of the joda-time library
+	// in the joda-time group.
+	// If we were building a war file this library
+	// would also be included in /WEB-INF/libs folder
+	compile "joda-time:joda-time:2.2"
+
+	// testCompile dependences are used for compiling
+	// and running tests, but not required for building
+	// the project
+	testCompile "junit:junit:4.12"
+}
+
+
+// Lets specify a name for the JAR file
+// For this case: hgradle-example-0.1.0.jar
+jar {
+	baseName = 'hgradle-example'
+	version = '0.1.0'
+}
